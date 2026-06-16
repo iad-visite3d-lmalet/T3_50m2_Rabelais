@@ -16,13 +16,22 @@
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
+:root {
+  --iad-blue: #006b98;
+  --iad-blue-light: #009fe3;
+  --iad-dark: #062b3f;
+  --iad-white: #ffffff;
+  --iad-top: 104px;
+  --iad-bottom: 78px;
+}
+
 html, body {
   width: 100%;
   height: 100%;
   padding: 0;
   margin: 0;
   overflow: hidden;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   background-color: #000;
   color: #fff;
@@ -33,83 +42,158 @@ a, a:hover, a:active, a:visited {
   color: inherit;
 }
 
-#pano {
+/* =========================
+   BANDEAU HAUT IAD
+   ========================= */
+
+#iadTopbar {
   position: absolute;
+  z-index: 3000;
   top: 0;
   left: 0;
+  right: 0;
+  height: var(--iad-top);
+  background: #fff;
+  color: var(--iad-dark);
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  padding: 14px 24px;
+  border-bottom: 5px solid var(--iad-blue-light);
+  box-shadow: 0 4px 18px rgba(0,0,0,.20);
+}
+
+.iad-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 280px;
+}
+
+.iad-logo {
+  font-size: 44px;
+  line-height: 34px;
+  color: var(--iad-blue);
+  font-weight: 900;
+  letter-spacing: -4px;
+}
+
+.iad-brand-name {
+  color: var(--iad-blue);
+  font-size: 25px;
+  line-height: 1;
+  font-weight: 900;
+}
+
+.iad-tagline {
+  margin-top: 8px;
+  color: #555;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.iad-separator {
+  width: 1px;
+  height: 52px;
+  background: #c9d4da;
+  flex: 0 0 auto;
+}
+
+.iad-agent {
+  min-width: 190px;
+}
+
+.iad-agent strong {
+  display: block;
+  color: var(--iad-blue);
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.iad-agent span {
+  color: #555;
+  font-size: 15px;
+}
+
+.iad-contact-item {
+  color: var(--iad-blue) !important;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  white-space: nowrap;
+  font-size: 15px;
+  line-height: 1.15;
+}
+
+.iad-contact-item strong {
+  font-weight: 900;
+}
+
+.iad-contact-item span {
+  color: #555;
+  font-size: 13px;
+}
+
+.iad-main-button {
+  margin-left: auto;
+  background: var(--iad-blue);
+  color: #fff !important;
+  padding: 14px 22px;
+  border-radius: 999px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+/* =========================
+   PANORAMA ET INTERFACE MARZIPANO
+   ========================= */
+
+#pano {
+  position: absolute;
+  top: var(--iad-top);
+  left: 0;
+  right: 0;
+  bottom: var(--iad-bottom);
   width: 100%;
-  height: 100%;
+  height: auto;
   overflow: hidden;
 }
 
+/* Barre titre */
 #titleBar {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 40px;
-  height: 40px;
+  z-index: 1100;
+  top: var(--iad-top);
+  left: 42px;
+  right: 42px;
+  height: 42px;
   text-align: center;
-}
-
-.mobile #titleBar {
-  height: 50px;
-  right: 50px;
-}
-
-/* If there is a fullscreen button the title bar must make space for it */
-body.fullscreen-enabled #titleBar {
-  right: 80px;
-}
-
-body.fullscreen-enabled.mobile #titleBar {
-  right: 100px;
-}
-
-/* If there are multiple scenes the title bar must make space for the scene list toggle */
-body.multiple-scenes #titleBar {
-  left: 40px;
-}
-
-body.multiple-scenes.mobile #titleBar {
-  left: 50px;
 }
 
 #titleBar .sceneName {
   width: 100%;
   height: 100%;
-  line-height: 30px;
+  line-height: 32px;
   padding: 5px;
-  background-color: rgb(58,68,84);
-  background-color: rgba(58,68,84,0.8);
+  background-color: rgba(34,42,54,0.82);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-
-  -moz-user-select: text;
-  -webkit-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
+  color: #fff;
+  font-weight: 700;
 }
 
-.mobile #titleBar .sceneName {
-  line-height: 40px;
-}
-
+/* Bouton plein écran */
 #fullscreenToggle {
   display: none;
   position: absolute;
-  top: 0;
+  z-index: 1200;
+  top: var(--iad-top);
   right: 0;
-  width: 40px;
-  height: 40px;
-  padding: 5px;
-  background-color: rgb(103,115,131);
-  background-color: rgba(103,115,131,0.8);
-}
-
-.mobile #fullscreenToggle {
-  width: 50px;
-  height: 50px;
+  width: 42px;
+  height: 42px;
+  padding: 6px;
+  background-color: rgba(103,115,131,0.85);
 }
 
 body.fullscreen-enabled #fullscreenToggle {
@@ -118,23 +202,12 @@ body.fullscreen-enabled #fullscreenToggle {
 
 #fullscreenToggle .icon {
   position: absolute;
-  top: 5px;
-  right: 5px;
   width: 30px;
   height: 30px;
 }
 
-.mobile #fullscreenToggle .icon {
-  top: 10px;
-  right: 10px;
-}
-
 #fullscreenToggle .icon.on {
   display: none;
-}
-
-#fullscreenToggle .icon.off {
-  display: block;
 }
 
 #fullscreenToggle.enabled .icon.on {
@@ -145,51 +218,27 @@ body.fullscreen-enabled #fullscreenToggle {
   display: none;
 }
 
+/* Autorotation */
 #autorotateToggle {
   display: block;
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 40px;
-  height: 40px;
-  padding: 5px;
-  background-color: rgb(103,115,131);
-  background-color: rgba(103,115,131,0.8);
-}
-
-.mobile #autorotateToggle {
-  width: 50px;
-  height: 50px;
-}
-
-/* If there is a fullscreen button, autorotate must placed a bit to the left */
-body.fullscreen-enabled #autorotateToggle {
-  right: 40px;
-}
-
-body.fullscreen-enabled.mobile #autorotateToggle {
-  right: 50px;
+  z-index: 1200;
+  top: var(--iad-top);
+  right: 42px;
+  width: 42px;
+  height: 42px;
+  padding: 6px;
+  background-color: rgba(103,115,131,0.85);
 }
 
 #autorotateToggle .icon {
   position: absolute;
-  top: 5px;
-  right: 5px;
   width: 30px;
   height: 30px;
 }
 
-.mobile #autorotateToggle .icon {
-  top: 10px;
-  right: 10px;
-}
-
 #autorotateToggle .icon.on {
   display: none;
-}
-
-#autorotateToggle .icon.off {
-  display: block;
 }
 
 #autorotateToggle.enabled .icon.on {
@@ -200,49 +249,26 @@ body.fullscreen-enabled.mobile #autorotateToggle {
   display: none;
 }
 
+/* Toggle liste scènes */
 #sceneListToggle {
   position: absolute;
-  top: 0;
+  z-index: 1200;
+  top: var(--iad-top);
   left: 0;
-  width: 40px;
-  height: 40px;
-  padding: 5px;
-  background-color: rgb(103,115,131);
-  background-color: rgba(103,115,131,0.8);
-}
-
-.mobile #sceneListToggle {
-  width: 50px;
-  height: 50px;
-}
-
-#sceneListToggle .text {
-  position: absolute;
-  top: 5px;
-  left: 15px;
-  width: 100%;
-  line-height: 30px;
+  width: 42px;
+  height: 42px;
+  padding: 6px;
+  background-color: rgba(103,115,131,0.85);
 }
 
 #sceneListToggle .icon {
   position: absolute;
-  top: 5px;
-  right: 5px;
   width: 30px;
   height: 30px;
 }
 
-.mobile #sceneListToggle .icon {
-  top: 10px;
-  right: 10px;
-}
-
 #sceneListToggle .icon.on {
   display: none;
-}
-
-#sceneListToggle .icon.off {
-  display: block;
 }
 
 #sceneListToggle.enabled .icon.on {
@@ -253,106 +279,92 @@ body.fullscreen-enabled.mobile #autorotateToggle {
   display: none;
 }
 
+/* Liste scènes */
 #sceneList {
   position: absolute;
-  top: 0;
-  left: -220px;
-  padding-top: 40px;
-  width: 220px;
-  max-height: 100%;
+  z-index: 1150;
+  top: calc(var(--iad-top) + 42px);
+  left: 0;
+  width: 230px;
+  max-height: calc(100% - var(--iad-top) - var(--iad-bottom) - 42px);
   overflow-x: hidden;
   overflow-y: auto;
-  margin-left: 0;
-  -webkit-transition: margin-left 0.5s ease-in-out;
-  transition: margin-left 0.5s ease-in-out;
+  margin-left: -230px;
+  background-color: rgba(34,42,54,0.88);
+  transition: margin-left 0.25s ease;
 }
 
-.mobile #sceneList {
-  padding-top: 50px;
+#sceneList.enabled {
+  margin-left: 0;
 }
 
 #sceneList .scenes {
   width: 100%;
-  background-color: rgb(58,68,84);
-  background-color: rgba(58,68,84,0.8);
-}
-
-.mobile #sceneList {
-  width: 100%;
-  height: 100%;
-  left: -100%;
-}
-
-.mobile #sceneList.enabled {
-  margin-left: 100%;
-}
-
-.mobile #sceneList .scenes {
-  height: 100%;
-}
-
-#sceneList.enabled {
-  margin-left: 220px;
 }
 
 #sceneList .scene {
   display: block;
   width: 100%;
-  height: 30px;
-}
-
-.mobile #sceneList .scene {
-  height: 40px;
+  min-height: 42px;
 }
 
 #sceneList .scene .text {
-  width: 100%;
-  height: 100%;
-  padding: 0 15px;
-  line-height: 30px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  color: #fff;
+  padding: 11px 14px;
+  font-size: 16px;
+  line-height: 20px;
+  transition: background-color .15s ease;
 }
 
-.mobile #sceneList .scene .text {
-  line-height: 40px;
-}
-
-.no-touch #sceneList .scene:hover {
-  background-color: rgb(103,115,131);
-  background-color: rgba(103,115,131,0.8);
-}
-
+#sceneList .scene:hover,
 #sceneList .scene.current {
-  background-color: rgb(103,115,131);
-  background-color: rgba(103,115,131,0.8);
+  background-color: rgba(111,128,148,0.75);
 }
 
-/* Hide scene list when only a single scene exists */
-body.single-scene #sceneList, body.single-scene #sceneListToggle {
+#sceneList .scene.current .text {
+  font-weight: 900;
+}
+
+/* Contrôles de vue */
+.viewControlButton {
   display: none;
+  position: absolute;
+  z-index: 1200;
+  width: 42px;
+  height: 42px;
+  padding: 6px;
+  background-color: rgba(103,115,131,0.85);
 }
 
-/* Link hotspot */
+body.view-control-buttons .viewControlButton {
+  display: block;
+}
 
+.viewControlButton .icon {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+}
+
+.viewControlButton-1 { left: 50%; bottom: calc(var(--iad-bottom) + 82px); margin-left: -21px; }
+.viewControlButton-2 { left: 50%; bottom: calc(var(--iad-bottom) + 10px); margin-left: -21px; }
+.viewControlButton-3 { left: 50%; bottom: calc(var(--iad-bottom) + 46px); margin-left: -63px; }
+.viewControlButton-4 { left: 50%; bottom: calc(var(--iad-bottom) + 46px); margin-left: 21px; }
+.viewControlButton-5 { right: 10px; bottom: calc(var(--iad-bottom) + 58px); }
+.viewControlButton-6 { right: 10px; bottom: calc(var(--iad-bottom) + 10px); }
+
+/* Hotspots */
 .link-hotspot {
   width: 60px;
   height: 60px;
   margin-left: -30px;
   margin-top: -30px;
   opacity: 0.9;
-  -webkit-transition: opacity 0.2s;
   transition: opacity 0.2s;
 }
 
 .no-touch .link-hotspot:hover {
   opacity: 1;
-}
-
-.mobile .link-hotspot {
-  width: 70px;
-  height: 70px;
 }
 
 .link-hotspot-icon {
@@ -361,151 +373,47 @@ body.single-scene #sceneList, body.single-scene #sceneListToggle {
   cursor: pointer;
 }
 
-.link-hotspot-tooltip {
-  position: absolute;
-  left: 100%;
-  top: 14px; /* ( 60 - (16 + 2*8) ) / 2 */
-
-  margin-left: 3px;
-
-  font-size: 16px;
-
-  max-width: 300px;
-
-  padding: 8px 10px;
-
-  border-radius: 5px;
-
-  background-color: rgb(58,68,84);
-  background-color: rgba(58,68,84,0.8);
-
-  color: #fff;
-
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-
-  cursor: pointer;
-
-  opacity: 0;
-
-  -ms-transform: translateX(-8px);
-  -webkit-transform: translateX(-8px);
-  transform: translateX(-8px);
-
-  -webkit-transition: -ms-transform 0.3s,
-                      -webkit-transform 0.3s,
-                      transform 0.3s,
-                      opacity 0.3s;
-  transition: -ms-transform 0.3s,
-              -webkit-transform 0.3s,
-              transform 0.3s,
-              opacity 0.3s;
-}
-
-.mobile .link-hotspot {
-  top: 19px; /* ( 70 - (16 + 2*8) ) / 2 */
-}
-
-.no-touch .link-hotspot:hover .link-hotspot-tooltip {
-  opacity: 1;
-  -ms-transform: translateX(0);
-  -webkit-transform: translateX(0);
-  transform: translateX(0);
-}
-
-/* Prevent tooltip from triggering */
-.link-hotspot-tooltip {
-  pointer-events: none;
-}
-.no-touch .link-hotspot:hover .link-hotspot-tooltip {
-  pointer-events: all;
-}
-
-/* Fallback mode without pointer-events (IE8-10) */
-.tooltip-fallback .link-hotspot-tooltip {
-  display: none;
-}
-.no-touch .tooltip-fallback .link-hotspot:hover .link-hotspot-tooltip {
-  display: block;
-}
-
-/* Info hotspot */
-
 .info-hotspot {
   line-height: 1.2em;
   opacity: 0.9;
-  -webkit-transition: opacity 0.2s 0.2s;
   transition: opacity 0.2s 0.2s;
 }
 
 .no-touch .info-hotspot:hover {
   opacity: 1;
-  -webkit-transition: opacity 0.2s;
   transition: opacity 0.2s;
 }
 
-.info-hotspot.visible {
-  opacity: 1;
-}
-
-.info-hotspot .info-hotspot-header {
+.info-hotspot-header {
   width: 40px;
   height: 40px;
   border-radius: 20px;
   background-color: rgb(103,115,131);
   cursor: pointer;
-  -webkit-transition: width 0.3s ease-in-out 0.5s,
-                      border-radius 0.3s ease-in-out 0.5s;
   transition: width 0.3s ease-in-out 0.5s,
               border-radius 0.3s ease-in-out 0.5s;
 }
 
-.mobile .info-hotspot .info-hotspot-header {
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
-}
-
-.desktop.no-touch .info-hotspot .info-hotspot-header:hover {
+.desktop.no-touch .info-hotspot:hover .info-hotspot-header,
+.desktop .info-hotspot.visible .info-hotspot-header {
   width: 260px;
-  border-radius: 5px;
-  -webkit-transition: width 0.3s ease-in-out,
-                      border-radius 0.3s ease-in-out;
+  border-radius: 20px 20px 0 0;
   transition: width 0.3s ease-in-out,
               border-radius 0.3s ease-in-out;
 }
 
-.desktop .info-hotspot.visible .info-hotspot-header,
-.desktop.no-touch .info-hotspot.visible .info-hotspot-header:hover {
-  width: 260px;
-  border-radius: 5px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-  -webkit-transition: width 0.3s ease-in-out,
-                      border-radius 0.3s ease-in-out;
-  transition: width 0.3s ease-in-out,
-              border-radius 0.3s ease-in-out;
-}
-
-.info-hotspot .info-hotspot-icon-wrapper {
+.info-hotspot-icon-wrapper {
   width: 40px;
   height: 40px;
 }
 
-.mobile .info-hotspot .info-hotspot-icon-wrapper {
-  width: 50px;
-  height: 50px;
-}
-
-.info-hotspot .info-hotspot-icon {
+.info-hotspot-icon {
   width: 90%;
   height: 90%;
   margin: 5%;
 }
 
-.info-hotspot .info-hotspot-title-wrapper {
+.info-hotspot-title-wrapper {
   position: absolute;
   left: 40px;
   top: 0;
@@ -513,318 +421,250 @@ body.single-scene #sceneList, body.single-scene #sceneListToggle {
   height: 40px;
   padding: 0;
   overflow: hidden;
-  -webkit-transition: width 0s 0.4s,
-                      padding 0s 0.4s;
   transition: width 0s 0.4s,
               padding 0s 0.4s;
 }
 
-.desktop .info-hotspot.visible .info-hotspot-title-wrapper,
-.desktop.no-touch .info-hotspot .info-hotspot-header:hover .info-hotspot-title-wrapper {
+.desktop.no-touch .info-hotspot:hover .info-hotspot-title-wrapper,
+.desktop .info-hotspot.visible .info-hotspot-title-wrapper {
   width: 220px;
   padding: 0 5px;
-  -webkit-transition: width 0s 0.4s,
-                      padding 0s 0.4s;
   transition: width 0s 0.4s,
               padding 0s 0.4s;
 }
 
-.info-hotspot .info-hotspot-title-wrapper:before {
-  content: '';
-  display: inline-block;
-  vertical-align: middle;
-  height: 100%;
-}
-
-.info-hotspot .info-hotspot-title {
-  display: inline-block;
-  vertical-align: middle;
-
-  -moz-user-select: text;
-  -webkit-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
-}
-
-.info-hotspot .info-hotspot-close-wrapper {
-  position: absolute;
-  left: 260px;
-  top: 0;
+.info-hotspot-title {
+  width: 210px;
   height: 40px;
-  width: 40px;
-  border-top-right-radius: 5px;
-  background-color: rgb(78,88,104);
-  visibility: hidden;
-  -ms-transform: perspective(200px) rotateY(90deg);
-  -webkit-transform: perspective(200px) rotateY(90deg);
-  transform: perspective(200px) rotateY(90deg);
-  -ms-transform-origin: 0 50% 0;
-  -webkit-transform-origin: 0 50% 0;
-  transform-origin: 0 50% 0;
-  -webkit-transition: -ms-transform 0.3s 0.3s,
-                      -webkit-transform 0.3s 0.3s,
-                      transform 0.3s 0.3s,
-                      visibility 0s 0.6s;
-  transition: -ms-transform 0.3s 0.3s,
-              -webkit-transform 0.3s 0.3s,
-              transform 0.3s 0.3s,
-              visibility 0s 0.6s;
+  line-height: 40px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.desktop .info-hotspot.visible .info-hotspot-close-wrapper {
-  visibility: visible;
-  -ms-transform: perspective(200px) rotateY(0deg);
-  -webkit-transform: perspective(200px) rotateY(0deg);
-  transform: perspective(200px) rotateY(0deg);
-  -webkit-transition: -ms-transform 0.3s,
-                      -webkit-transform 0.3s,
-                      transform 0.3s,
-                      visibility 0s 0s;
-  transition: -ms-transform 0.3s,
-              -webkit-transform 0.3s,
-              transform 0.3s,
-              visibility 0s 0s;
-}
-
-.info-hotspot .info-hotspot-close-icon {
-  width: 70%;
-  height: 70%;
-  margin: 15%;
-}
-
-.info-hotspot .info-hotspot-text {
+.info-hotspot-text {
   position: absolute;
-  width: 300px;
+  width: 260px;
   height: auto;
   max-height: 200px;
   top: 40px;
   left: 0;
   padding: 10px;
   background-color: rgb(58,68,84);
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
+  border-radius: 0 0 20px 20px;
   overflow-y: auto;
-  visibility: hidden;
-  /* rotate(90deg) causes transition flicker on Firefox 58 */
-  -ms-transform: perspective(200px) rotateX(-89.999deg);
-  -webkit-transform: perspective(200px) rotateX(-89.999deg);
-  transform: perspective(200px) rotateX(-89.999deg);
-  -ms-transform-origin: 50% 0 0;
-  -webkit-transform-origin: 50% 0 0;
-  transform-origin: 50% 0 0;
-  -webkit-transition: -ms-transform 0.3s,
-                      -webkit-transform 0.3s,
-                      transform 0.3s,
-                      visibility 0s 0.3s;
-  transition: -ms-transform 0.3s,
-              -webkit-transform 0.3s,
-              transform 0.3s,
-              visibility 0s 0.3s;
-
-  -moz-user-select: text;
-  -webkit-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
+  transform: scaleY(0);
+  transform-origin: top center;
+  transition: transform 0.3s ease-in-out 0.2s;
 }
 
+.desktop.no-touch .info-hotspot:hover .info-hotspot-text,
 .desktop .info-hotspot.visible .info-hotspot-text {
-  visibility: visible;
-  -ms-transform: perspective(200px) rotateX(0deg);
-  -webkit-transform: perspective(200px) rotateX(0deg);
-  transform: perspective(200px) rotateX(0deg);
-  -webkit-transition: -ms-transform 0.3s 0.3s,
-                      -webkit-transform 0.3s 0.3s,
-                      transform 0.3s 0.3s,
-                      visibility 0s 0s;
-  transition: -ms-transform 0.3s 0.3s,
-              -webkit-transform 0.3s 0.3s,
-              transform 0.3s 0.3s,
-              visibility 0s 0s;
+  transform: scaleY(1);
+  transition: transform 0.3s ease-in-out 0.4s;
 }
 
-/* Info hotspot modal */
-
-.desktop .info-hotspot-modal {
-  display: none;
-}
-
+/* Modal mobile info hotspots */
 .info-hotspot-modal {
-  top: 0;
-  left: 0;
+  display: none;
   position: absolute;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 11000 !important;
-  background-color: rgba(0,0,0,.5);
-  line-height: 1.2em;
-  opacity: 0;
-  visibility: hidden;
-  -webkit-transition: opacity 0.2s ease-in-out 0.5s,
-                      visibility 0s 0.7s;
-  transition: opacity 0.2s ease-in-out 0.5s,
-              visibility 0s 0.7s;
+  z-index: 20000;
+  top: var(--iad-top);
+  left: 0;
+  right: 0;
+  bottom: var(--iad-bottom);
+  background-color: rgba(0,0,0,.45);
 }
 
 .info-hotspot-modal.visible {
-  opacity: 1;
-  visibility: visible;
-  -webkit-transition: opacity 0.2s ease-in-out,
-                      visibility 0s 0s;
-  transition: opacity 0.2s ease-in-out,
-              visibility 0s 0s;
+  display: block;
 }
 
 .info-hotspot-modal .info-hotspot-header {
   position: absolute;
   top: 60px;
-  left: 10px;
-  right: 10px;
-  width: auto;
-  height: 50px;
-  background-color: rgb(103,115,131);
-  background-color: rgba(103,115,131,0.8);
-  opacity: 0;
-  -webkit-transition: opacity 0.3s ease-in-out 0.2s;
-  transition: opacity 0.3s ease-in-out 0.2s;
-}
-
-.info-hotspot-modal.visible .info-hotspot-header {
-  opacity: 1;
-  -webkit-transition: opacity 0.3s ease-in-out 0.2s;
-  transition: opacity 0.3s ease-in-out 0.2s;
-}
-
-.info-hotspot-modal .info-hotspot-icon-wrapper {
-  width: 50px;
-  height: 50px;
-}
-
-.info-hotspot-modal .info-hotspot-icon {
-  width: 90%;
-  height: 90%;
-  margin: 5%;
-}
-
-.info-hotspot-modal .info-hotspot-title-wrapper {
-  position: absolute;
-  top: 0;
-  left: 50px;
-  right: 50px;
-  width: auto;
-  height: 50px;
-  padding: 0 10px;
-}
-
-.info-hotspot-modal .info-hotspot-title-wrapper:before {
-  content: '';
-  display: inline-block;
-  vertical-align: middle;
-  height: 100%;
-}
-
-.info-hotspot-modal .info-hotspot-title {
-  display: inline-block;
-  vertical-align: middle;
-
-  -moz-user-select: text;
-  -webkit-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
-}
-
-.info-hotspot-modal .info-hotspot-close-wrapper {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 50px;
-  height: 50px;
-  background-color: rgb(78,88,104);
-  background-color: rgba(78,88,104,0.8);
-  cursor: pointer;
-}
-
-.info-hotspot-modal .info-hotspot-close-icon {
-  width: 70%;
-  height: 70%;
-  margin: 15%;
+  left: 10%;
+  right: 10%;
+  width: 80%;
+  border-radius: 20px 20px 0 0;
 }
 
 .info-hotspot-modal .info-hotspot-text {
   position: absolute;
-  top: 110px;
-  bottom: 10px;
-  left: 10px;
-  right: 10px;
-  padding: 10px;
-  background-color: rgb(58,68,84);
-  background-color: rgba(58,68,84,0.8);
-  overflow-y: auto;
-  opacity: 0;
-  -webkit-transition: opacity 0.3s ease-in-out;
-  transition: opacity 0.3s ease-in-out;
-
-  -moz-user-select: text;
-  -webkit-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
+  top: 100px;
+  left: 10%;
+  right: 10%;
+  width: 80%;
+  max-height: calc(100% - 160px);
+  transform: none;
 }
 
-.info-hotspot-modal.visible .info-hotspot-text {
-  opacity: 1;
-  -webkit-transition: opacity 0.3s ease-in-out 0.4s;
-  transition: opacity 0.3s ease-in-out 0.4s;
-}
+/* =========================
+   BANDEAU BAS IAD
+   ========================= */
 
-/* View control buttons */
-
-.viewControlButton {
-  display: none;
+#iadBottombar {
   position: absolute;
+  z-index: 3000;
+  left: 0;
+  right: 0;
   bottom: 0;
-  left: 50%;
-  width: 40px;
-  height: 40px;
-  padding: 5px;
-  background-color: rgb(103,115,131);
-  background-color: rgba(103,115,131,0.8);
+  height: var(--iad-bottom);
+  background: linear-gradient(135deg, var(--iad-blue), var(--iad-dark));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 12px 26px;
+  box-shadow: 0 -4px 18px rgba(0,0,0,.22);
 }
 
-body.view-control-buttons .viewControlButton {
+.iad-bottom-link {
+  color: #fff !important;
   display: block;
+  white-space: nowrap;
+  line-height: 1.25;
 }
 
-/* Hide controls when width is too small */
-@media (max-width: 600px) {
-  body.view-control-buttons .viewControlButton {
+.iad-bottom-link strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.iad-bottom-link span {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  opacity: .9;
+}
+
+.iad-bottom-separator {
+  height: 42px;
+  width: 1px;
+  background: rgba(255,255,255,.35);
+}
+
+.iad-bottom-spacer {
+  flex: 1;
+}
+
+.iad-bottom-logo {
+  font-size: 38px;
+  font-weight: 900;
+  letter-spacing: -4px;
+  line-height: .8;
+}
+
+.iad-bottom-project {
+  min-width: 170px;
+  line-height: 1.25;
+}
+
+.iad-bottom-project strong {
+  display: block;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.iad-bottom-project span {
+  display: block;
+  font-size: 15px;
+  margin-top: 4px;
+}
+
+.iad-bottom-button {
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,.85);
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+/* Compat mobile */
+@media (max-width: 950px), (max-height: 560px) {
+  :root {
+    --iad-top: 72px;
+    --iad-bottom: 64px;
+  }
+
+  #iadTopbar {
+    height: var(--iad-top);
+    padding: 8px 12px;
+    gap: 12px;
+  }
+
+  .iad-logo {
+    font-size: 34px;
+    line-height: 28px;
+  }
+
+  .iad-brand {
+    min-width: auto;
+  }
+
+  .iad-brand-name,
+  .iad-tagline,
+  .iad-separator,
+  .iad-agent span,
+  .iad-contact-item {
     display: none;
   }
-}
 
-.viewControlButton .icon {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  width: 30px;
-  height: 30px;
-}
+  .iad-agent {
+    min-width: auto;
+  }
 
-/* Center is at margin-left: -20px */
-.viewControlButton-1 {
-  margin-left: -145px;
-}
-.viewControlButton-2 {
-  margin-left: -95px;
-}
-.viewControlButton-3 {
-  margin-left: -45px;
-}
-.viewControlButton-4 {
-  margin-left: 5px;
-}
-.viewControlButton-5 {
-  margin-left: 55px;
-}
-.viewControlButton-6 {
-  margin-left: 105px;
+  .iad-agent strong {
+    font-size: 15px;
+  }
+
+  .iad-main-button {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+
+  #titleBar {
+    left: 50px;
+    right: 50px;
+    height: 50px;
+  }
+
+  #titleBar .sceneName {
+    line-height: 40px;
+  }
+
+  #sceneListToggle,
+  #fullscreenToggle,
+  #autorotateToggle {
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+  }
+
+  #autorotateToggle {
+    right: 50px;
+  }
+
+  #sceneList {
+    top: calc(var(--iad-top) + 50px);
+    max-height: calc(100% - var(--iad-top) - var(--iad-bottom) - 50px);
+  }
+
+  #iadBottombar {
+    height: var(--iad-bottom);
+    padding: 8px 12px;
+  }
+
+  .iad-bottom-link,
+  .iad-bottom-separator,
+  .iad-bottom-logo,
+  .iad-bottom-project {
+    display: none;
+  }
+
+  .iad-bottom-button {
+    margin-left: auto;
+  }
 }
