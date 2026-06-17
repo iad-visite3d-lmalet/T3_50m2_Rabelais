@@ -1,4 +1,4 @@
-/* iad-theme/iad.js — V11 logos PNG officiels ajustés */
+/* iad-theme/iad.js — V12 */
 
 (function () {
   "use strict";
@@ -46,21 +46,21 @@
     bottombar.innerHTML = `
       <a class="iad-bottom-link" href="tel:${config.phone}">
         <span class="iad-bottom-icon">${icons.phone}</span>
-        <span><strong>${config.phoneDisplay}</strong><span>Appelez-moi</span></span>
+        <span><strong>${config.phoneDisplay}</strong><span>Appeler</span></span>
       </a>
 
       <div class="iad-bottom-separator"></div>
 
       <a class="iad-bottom-link" href="mailto:${config.email}">
         <span class="iad-bottom-icon">${icons.mail}</span>
-        <span><strong>${config.email}</strong><span>Écrivez-moi</span></span>
+        <span><strong>${config.email}</strong><span>Email</span></span>
       </a>
 
       <div class="iad-bottom-separator"></div>
 
       <a class="iad-bottom-link iad-bottom-site" href="${config.website}" target="_blank" rel="noopener">
         <span class="iad-bottom-icon">${icons.globe}</span>
-        <span><strong>${config.websiteDisplay}</strong><span>Visitez mon site IAD</span></span>
+        <span><strong>${config.websiteDisplay}</strong><span>Site IAD</span></span>
       </a>
 
       <div class="iad-bottom-spacer"></div>
